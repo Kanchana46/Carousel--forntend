@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container } from '@material-ui/core';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Auth from './components/Auth/Auth';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <GoogleOAuthProvider clientId='746610514615-i8jnsiqtmh3jvqgstrsavdel388k60fk.apps.googleusercontent.com'>
+            <BrowserRouter>
+                <Container maxwidth="lg">
+                    <Navbar />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/auth" element={<Auth />} />
+                    </Routes>
+                </Container>
+            </BrowserRouter>
+        </GoogleOAuthProvider>
+    )
+};
 
 export default App;
