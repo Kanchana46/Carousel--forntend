@@ -18,7 +18,6 @@ function useQuery() {
 
 
 const Home = () => {
-    console.log('Home')
     const classes = useStyles();
     const dispatch = useDispatch();
     const navigate = useNavigate();

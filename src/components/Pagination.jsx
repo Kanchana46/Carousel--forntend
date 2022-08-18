@@ -13,7 +13,6 @@ const Paginate = ({ page }) => {
     const dispatch = useDispatch();
     //let search = useLocation().search
     useEffect(() => {
-        console.log('Pagination UE')
         if (page) dispatch(getPosts(page));
     }, [page]);
 

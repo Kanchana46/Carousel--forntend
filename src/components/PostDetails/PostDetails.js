@@ -10,7 +10,6 @@ import CommentSection from './CommentSection';
 
 const PostDetails = () => {
     let { posts, isLoading } = useSelector((state) => state.posts);
-    console.log(useSelector((state) => state.posts))
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const classes = useStyles();

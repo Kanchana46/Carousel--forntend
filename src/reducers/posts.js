@@ -40,7 +40,6 @@ export default (state = { isLoading: false, posts: [] }, action) => {
                 posts: action.payload
             }
         case COMMENT:
-            console.log(state)
             return {
                 ...state,
                 posts: state.posts.map((post) => {
