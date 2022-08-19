@@ -52,7 +52,6 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant="h6" >{post.name}</Typography>
                     <Typography variant="body2" >{moment(post.createdAt).fromNow()}</Typography>
                 </div>
-
                 <div className={classes.details}>
                     <Typography variant="body2" color="textSecondary">
                         {post.tags.map((tag) => `#${tag} `)}

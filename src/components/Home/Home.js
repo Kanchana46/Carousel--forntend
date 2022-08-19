@@ -23,17 +23,15 @@ const Home = () => {
     const navigate = useNavigate();
     const query = useQuery();
     const page = query.get('page') || 1;
-    const searchQuery = query.get('searchQuery');
-
+    //const searchQuery = query.get('searchQuery');
     const [currentId, setCurrentId] = useState(null);
     const [search, setSearch] = useState("");
     const [tags, setTags] = useState([]);
-    localStorage.setItem('page', page);
-    //const location = useLocation();
 
+    //const location = useLocation();
     /*useEffect(() => {
-        dispatch(getPosts());
-    }, [currentId, dispatch]);*/
+        if (!search && tags.length === 0) dispatch(getPosts(page));
+    }, [search, tags]);*/
     /*
     useEffect(() => {
         dispatch(getPosts());
@@ -42,16 +40,14 @@ const Home = () => {
     useEffect(() => {
         dispatch(getPosts());
     }, [dispatch,currentId]);*/
+    useEffect(() => {
+        localStorage.setItem('prevPage', page);
+    }, [page])
 
     const handleKeyPress = (e) => {
         if (e.keyCode === 13) {
             searchPost();
         }
-    }
-    const handleAddChip = (tag) => setTags([...tags, tag]);
-    const handleDeleteChip = (chipToDelete) => {
-        setTags(tags.filter((tag) => tag !== chipToDelete));
-        if ((tags.length === 1) && (chipToDelete[0] === tags[0])) setTags([]);
     }
 
     const searchPost = () => {
@@ -60,6 +56,25 @@ const Home = () => {
             navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
         } else {
             navigate('/');
+        }
+    }
+
+    let prevPage = Number(localStorage.getItem('prevPage'));
+
+    const handleChange = (e) => {
+        setSearch(e.target.value);
+        if (e.target.value === "") dispatch(getPosts(prevPage));
+    }
+
+    const handleAddChip = (tag) => setTags([...tags, tag]);
+
+    const handleDeleteChip = (chipToDelete) => {
+        setTags(tags.filter((tag) => tag !== chipToDelete));
+        console.log(tags)
+        console.log(chipToDelete)
+        if ((tags.length === 1) && (chipToDelete === tags[0])) {
+            setTags([]);
+            dispatch(getPosts(prevPage));
         }
     }
 
@@ -78,7 +93,7 @@ const Home = () => {
                                 label="Search Memories"
                                 fullWidth
                                 value={search}
-                                onChange={(e) => { setSearch(e.target.value) }}
+                                onChange={handleChange}
                                 onKeyUp={handleKeyPress} />
                             <ChipInput
                                 style={{ margin: '10px 0' }}

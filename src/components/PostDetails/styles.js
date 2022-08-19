@@ -12,14 +12,17 @@ export default makeStyles((theme) => ({
         display: 'flex',
         width: '100%',
         [theme.breakpoints.down('sm')]: {
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
             flexDirection: 'column',
-        },
+        }
+        //overflow: "auto"
+
     },
     section: {
         borderRadius: '20px',
         margin: '10px',
         flex: 1,
+        //overflow: "auto"
     },
     imageSection: {
         marginLeft: '20px',
@@ -27,7 +30,7 @@ export default makeStyles((theme) => ({
             marginLeft: 0,
         },
         maxHeight: '75%',
-        maxWidth: '50%'
+        maxWidth: '90%'
     },
     recommendedPosts: {
         display: 'flex',
@@ -48,13 +51,9 @@ export default makeStyles((theme) => ({
         justifyContent: 'space-between',
     },
     commentsInnerContainer: {
-        height: '150px',
+        height: '300px',
         overflowY: 'auto',
         marginRight: '20px',
         minWidth: "350px"
-    },
-    top: {
-        paddingTop: '40px'
     }
-
 }));

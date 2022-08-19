@@ -11,9 +11,10 @@ const Paginate = ({ page }) => {
     // let prevPageNo = Number((new URLSearchParams(useLocation().search))?.get('page'));
     //if (prevPageNo === 0) prevPageNo = 1;
     const dispatch = useDispatch();
-    //let search = useLocation().search
+    let search = useLocation().search
+
     useEffect(() => {
-        if (page) dispatch(getPosts(page));
+        if (page && (search.indexOf("searchQuery") === -1)) dispatch(getPosts(page));
     }, [page]);
 
     return (
